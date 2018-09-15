@@ -49,52 +49,8 @@ export default class App extends React.Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.profile}>
-                    <Image
-                        style={{height: 150, width: 150}}
-                        source={require('./assets/heart-rate.png')}
-                    />
-
-                    <View style={styles.summary}>
-                        <View style={{alignContent : 'center'}}>
-                            <Text>90</Text>
-                            <Text>total fuel</Text>
-                        </View>
-
-                    </View>
-
-
-<<<<<<< HEAD
-=======
-        return (
-          <View style={styles.container}>
               <View style={{paddingTop: 20}}/>
               <Text style={{fontSize:40, fontWeight: 'bold'}}>Hello Zefam,</Text>
-                <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
-                    <YAxis
-                        data={this.state.data}
-                        style={{ marginBottom: this.state.xAxisHeight }}
-                        contentInset={this.state.verticalContentInset}
-                        svg={this.state.axesSvg}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <LineChart
-                            style={{ flex: 1 }}
-                            data={this.state.data}
-                            contentInset={this.state.verticalContentInset}
-                            svg={{ stroke: 'rgb(134, 65, 244)' }}
-                        >
-                            <Grid/>
-                        </LineChart>
-                        <XAxis
-                            style={{ marginHorizontal: -10, height: this.state.xAxisHeight }}
-                            data={this.state.data}
-                            formatLabel={(value, index) => index}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={this.state.axesSvg}
-                        />
-                    </View>
-                </View>
                 <View style={styles.analytics}>
                     <View style={[styles.stat, styles.importantStats]}>
                       <View style={styles.statColumn}>
@@ -106,51 +62,51 @@ export default class App extends React.Component {
                         <Text>Total Fuel</Text>
                       </View>
                     </View>
+
+                    <StackedAreaChart
+                        style={styles.mainChart}
+                        data={ data }
+                        keys={ keys }
+                        colors={ colors }
+                        curve={ shape.curveNatural }
+                        showGrid={ false }
+                        svgs={ svgs }
+                    />
+
                     <View style={styles.stat}>
                       <Image
                         style={{height: 50, width: 50}}
                         source={require('./assets/heart-rate.png')}
                       />
-                      <Text style={{padding: 10}}>Current Heart Rate:</Text>
+                      <Text style={{padding: 10}}>Current Heart Rate</Text>
                     </View>
                     <View style={styles.stat}>
                       <Image
                         style={{height: 50, width: 50}}
                         source={require('./assets/heart-rate.png')}
                       />
-                      <Text style={{padding: 10}}>Current Body Temperature:</Text>
+                      <Text style={{padding: 10}}>Current Body Temperature</Text>
                     </View>
                     <View style={styles.stat}>
                       <Image
                         style={{height: 50, width: 50}}
                         source={require('./assets/heart-rate.png')}
                       />
-                      <Text style={{padding: 10}}>Humidity %:</Text>
+                      <Text style={{padding: 10}}>Humidity %</Text>
                     </View>
->>>>>>> ebd04828d15b652d6f78fa81e008f52d1eaf97ea
                 </View>
-                <StackedAreaChart
-                    style={styles.mainChart}
-                    data={ data }
-                    keys={ keys }
-                    colors={ colors }
-                    curve={ shape.curveNatural }
-                    showGrid={ false }
-                    svgs={ svgs }
-                />
             </View>
-            
         )
     }
-
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-<<<<<<< HEAD
-    justifyContent: 'flex-start',
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        backgroundColor: '#ffffff',
+    },
   profile: {
     marginTop: 75,
     alignItems: 'center',
@@ -164,12 +120,6 @@ const styles = StyleSheet.create({
   mainChart: {
     height: 250, 
     paddingVertical: 16,
-  }
-
-=======
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: '#ffffff',
   },
   graph: {
     backgroundColor: "#333",
@@ -199,5 +149,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10
   }
->>>>>>> ebd04828d15b652d6f78fa81e008f52d1eaf97ea
+
 });

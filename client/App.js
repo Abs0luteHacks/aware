@@ -64,6 +64,70 @@ export default class App extends React.Component {
                     </View>
 
 
+<<<<<<< HEAD
+=======
+        return (
+          <View style={styles.container}>
+              <View style={{paddingTop: 20}}/>
+              <Text style={{fontSize:40, fontWeight: 'bold'}}>Hello Zefam,</Text>
+                <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
+                    <YAxis
+                        data={this.state.data}
+                        style={{ marginBottom: this.state.xAxisHeight }}
+                        contentInset={this.state.verticalContentInset}
+                        svg={this.state.axesSvg}
+                    />
+                    <View style={{ flex: 1, marginLeft: 10 }}>
+                        <LineChart
+                            style={{ flex: 1 }}
+                            data={this.state.data}
+                            contentInset={this.state.verticalContentInset}
+                            svg={{ stroke: 'rgb(134, 65, 244)' }}
+                        >
+                            <Grid/>
+                        </LineChart>
+                        <XAxis
+                            style={{ marginHorizontal: -10, height: this.state.xAxisHeight }}
+                            data={this.state.data}
+                            formatLabel={(value, index) => index}
+                            contentInset={{ left: 10, right: 10 }}
+                            svg={this.state.axesSvg}
+                        />
+                    </View>
+                </View>
+                <View style={styles.analytics}>
+                    <View style={[styles.stat, styles.importantStats]}>
+                      <View style={styles.statColumn}>
+                        <Text style={{paddingBottom: 10}}>90</Text>
+                        <Text>Total Fuel</Text>
+                      </View>
+                      <View style={styles.statColumn}>
+                        <Text style={{paddingBottom: 10}}>72 points/hr</Text>
+                        <Text>Total Fuel</Text>
+                      </View>
+                    </View>
+                    <View style={styles.stat}>
+                      <Image
+                        style={{height: 50, width: 50}}
+                        source={require('./assets/heart-rate.png')}
+                      />
+                      <Text style={{padding: 10}}>Current Heart Rate:</Text>
+                    </View>
+                    <View style={styles.stat}>
+                      <Image
+                        style={{height: 50, width: 50}}
+                        source={require('./assets/heart-rate.png')}
+                      />
+                      <Text style={{padding: 10}}>Current Body Temperature:</Text>
+                    </View>
+                    <View style={styles.stat}>
+                      <Image
+                        style={{height: 50, width: 50}}
+                        source={require('./assets/heart-rate.png')}
+                      />
+                      <Text style={{padding: 10}}>Humidity %:</Text>
+                    </View>
+>>>>>>> ebd04828d15b652d6f78fa81e008f52d1eaf97ea
                 </View>
                 <StackedAreaChart
                     style={styles.mainChart}
@@ -84,6 +148,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+<<<<<<< HEAD
     justifyContent: 'flex-start',
   },
   profile: {
@@ -101,4 +166,38 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   }
 
+=======
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#ffffff',
+  },
+  graph: {
+    backgroundColor: "#333",
+  },
+  panel: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '15%'
+  },
+  analytics: {
+    width: '100%'
+  },
+  stat: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    height: 100,
+    borderWidth: 2,
+  },
+  importantStats: {
+    justifyContent: 'center'
+  },
+  statColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 10
+  }
+>>>>>>> ebd04828d15b652d6f78fa81e008f52d1eaf97ea
 });

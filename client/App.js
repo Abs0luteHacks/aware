@@ -1,88 +1,81 @@
 import React from 'react';
-import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
+import { StackedAreaChart } from 'react-native-svg-charts'
+import * as shape from 'd3-shape'
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default class App extends React.Component {
 
-    update(){
-        for (x in this.state.data){
-            this.state.data[x] = this.state.data[x] * 100
-        }
-    }
+    render() {
 
-    constructor() {
-        super();
-        this.state = {
-            data: [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ],
-            axesSvg: { fontSize: 10, fill: 'grey' },
-            verticalContentInset : { top: 10, bottom: 10 },
-            xAxisHeight : 30
-          }
-    }
+        const data = [
+            {
+                month: new Date(2015, 0, 1),
+                apples: 3840,
+                bananas: 1920,
+                cherries: 960,
+                dates: 400,
+            },
+            {
+                month: new Date(2015, 1, 1),
+                apples: 1600,
+                bananas: 1440,
+                cherries: 960,
+                dates: 400,
+            },
+            {
+                month: new Date(2015, 2, 1),
+                apples: 640,
+                bananas: 960,
+                cherries: 3640,
+                dates: 400,
+            },
+            {
+                month: new Date(2015, 3, 1),
+                apples: 3320,
+                bananas: 480,
+                cherries: 640,
+                dates: 400,
+            },
+        ]
 
-  render() {
-
-        this.update()
-
-        // const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
-
-        // const axesSvg = { fontSize: 10, fill: 'grey' };
-        // const verticalContentInset = { top: 10, bottom: 10 }
-        // const xAxisHeight = 30
-
-        // Layout of an x-axis together with a y-axis is a problem that stems from flexbox.
-        // All react-native-svg-charts components support full flexbox and therefore all
-        // layout problems should be approached with the mindset "how would I layout regular Views with flex in this way".
-        // In order for us to align the axes correctly we must know the height of the x-axis or the width of the x-axis
-        // and then displace the other axis with just as many pixels. Simple but manual.
-
-
+        const colors = [ '#8800cc', '#aa00ff', '#cc66ff', '#eeccff' ]
+        const keys   = [ 'apples', 'bananas', 'cherries', 'dates' ]
+        const svgs = [
+                    { onPress: () => console.log('apples') },
+                    { onPress: () => console.log('bananas') },
+                    { onPress: () => console.log('cherries') },
+                    { onPress: () => console.log('dates') },
+                ]
 
         return (
-          <View>
-              <View style={{paddingTop: 20}}/>
-              <Text style={{fontSize:40, fontWeight: 'bold'}}>Hello Zefam,</Text>
-                <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
-                    <YAxis
-                        data={this.state.data}
-                        style={{ marginBottom: this.state.xAxisHeight }}
-                        contentInset={this.state.verticalContentInset}
-                        svg={this.state.axesSvg}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <LineChart
-                            style={{ flex: 1 }}
-                            data={this.state.data}
-                            contentInset={this.state.verticalContentInset}
-                            svg={{ stroke: 'rgb(134, 65, 244)' }}
-                        >
-                            <Grid/>
-                        </LineChart>
-                        <XAxis
-                            style={{ marginHorizontal: -10, height: this.state.xAxisHeight }}
-                            data={this.state.data}
-                            formatLabel={(value, index) => index}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={this.state.axesSvg}
-                        />
-                    </View>
-                </View>
-                <View style={styles.analytics}>
-                    <View style={styles.stat}>
-                      <Image
-                        style={{height: 50, width: 50}}
+            <View style={styles.container}>
+                <View style={styles.profile}>
+                    <Image
+                        style={{height: 150, width: 150}}
                         source={require('./assets/heart-rate.png')}
-                      />
-                      <Text style={{padding: 10}}>Current Heart Rate:</Text>
+                    />
+
+                    <View style={styles.summary}>
+                        <View style={{alignContent : 'center'}}>
+                            <Text>90</Text>
+                            <Text>total fuel</Text>
+                        </View>
+
                     </View>
-                    <View style={styles.stat}>
-                      <Text style={{padding: 10}}>Current Body Temperature:</Text>
-                    </View>
-                    <View style={styles.stat}>
-                      <Text style={{padding: 10}}>Humidity %:</Text>
-                    </View>
+
+
                 </View>
+                <StackedAreaChart
+                    style={styles.mainChart}
+                    data={ data }
+                    keys={ keys }
+                    colors={ colors }
+                    curve={ shape.curveNatural }
+                    showGrid={ false }
+                    svgs={ svgs }
+                />
             </View>
+            
         )
     }
 
@@ -91,27 +84,21 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#99bbff'
-
   },
-  graph: {
-    backgroundColor: "#333",
-  },
-  panel: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '15%'
-  },
-  stat: {
-    display: 'flex',
-    flexDirection: 'row',
+  profile: {
+    marginTop: 75,
     alignItems: 'center',
-    padding: 10,
-    height: 100,
-    borderWidth: 2,
-    backgroundColor: '#e6eeff'
+    justifyContent: 'space-between'
   },
+  summary: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column'
+  },
+  mainChart: {
+    height: 250, 
+    paddingVertical: 16,
+  }
+
 });
